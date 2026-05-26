@@ -3,12 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Photos and videos from the EL-NOVIK workshop — instruments, sessions, performances, and behind-the-scenes." />
-  <meta name="theme-color" content="#0E0E0E" />
+  <meta name="description" content="Photos and videos from the EL-NOVIK workshop — instruments, sessions, performances." />
+  <meta name="theme-color" content="#FAF8F4" />
   <title>Gallery — EL-NOVIK</title>
 
   <link rel="icon" type="image/webp" href="assets/images/El_novik_logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="style.css" />
+
+  <script>
+    (function() {
+      var saved = localStorage.getItem('elnovik-theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
 </head>
 <body>
 
@@ -19,7 +28,7 @@
     <div class="nav-inner">
 
       <a href="index.html" class="brand" aria-label="EL-NOVIK home">
-        <img src="assets/images/El_novik_logo.webp" alt="" class="brand-mark" />
+        <img src="assets/images/El_novik_logo.webp" alt="" class="brand-mark" width="36" height="36" />
         <span class="brand-name">EL-NOVIK</span>
       </a>
 
@@ -31,124 +40,131 @@
         <a href="services.html" class="nav-link">Services</a>
       </nav>
 
-      <a href="contact.html" class="btn btn-ghost nav-cta">Contact</a>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+            <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+            <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+            <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+        <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Contact</a>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
 
     </div>
+
+   <div class="elv-drawer-back" id="drawerBack"></div>
+    <aside class="elv-drawer" id="drawer" aria-label="Mobile menu">
+      <div class="elv-drawer-top">
+        <span class="elv-drawer-brand">EL-NOVIK</span>
+        <button class="elv-drawer-x" id="drawerX" aria-label="Close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="elv-drawer-nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="elv-drawer-bottom">
+        <a href="https://wa.me/2349031482001" class="elv-drawer-wa" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          WhatsApp Us
+        </a>
+        <p class="elv-drawer-tag">Built for Sound · Made for Creativity · Rooted in Nigeria</p>
+      </div>
+    </aside>
   </header>
 
   <!-- ============================================================
-       PAGE HEADER
+       GALLERY  —  compact header + tabs + grid
        ============================================================ -->
-  <section class="page-header">
+  <main class="compact-page">
     <div class="container">
 
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="index.html">Home</a>
-        <span class="breadcrumb-sep" aria-hidden="true">/</span>
-        <span aria-current="page">Gallery</span>
-      </nav>
-
-      <div class="page-header-inner">
+      <header class="compact-head">
         <div>
-          <span class="eyebrow">The Workshop, in Motion</span>
-          <h1 class="page-title">Where the work happens.</h1>
+          <span class="eyebrow">The Workshop</span>
+          <h1 class="compact-title">Gallery</h1>
         </div>
-        <p class="lede page-header-lede">
-          Instruments in progress, sessions in session, performances, repairs,
-          installations &mdash; a window into the day-to-day.
-        </p>
-      </div>
+        <p class="compact-lede">Photos and videos from instruments, sessions, and projects.</p>
+      </header>
 
-    </div>
-  </section>
-
-  <!-- ============================================================
-       TAB BAR  —  All / Photos / Videos
-       ============================================================ -->
-  <section class="section section-gallery">
-    <div class="container">
-
-      <div class="gallery-tabs" role="tablist" aria-label="Filter gallery by media type">
+      <div class="gallery-tabs" role="tablist" aria-label="Filter by media type">
         <button class="gallery-tab is-active" data-tab="all" role="tab" aria-selected="true">
-          All
-          <span class="gallery-tab-count" id="galleryCountAll">0</span>
+          All <span class="gallery-tab-count" id="galleryCountAll">0</span>
         </button>
         <button class="gallery-tab" data-tab="photo" role="tab" aria-selected="false">
-          Photos
-          <span class="gallery-tab-count" id="galleryCountPhoto">0</span>
+          Photos <span class="gallery-tab-count" id="galleryCountPhoto">0</span>
         </button>
         <button class="gallery-tab" data-tab="video" role="tab" aria-selected="false">
-          Videos
-          <span class="gallery-tab-count" id="galleryCountVideo">0</span>
+          Videos <span class="gallery-tab-count" id="galleryCountVideo">0</span>
         </button>
       </div>
 
-      <!-- Gallery grid (filled by script.js) -->
       <div class="gallery-grid" id="galleryGrid" aria-live="polite">
-
-        <!-- Skeleton tiles while gallery loads -->
         <div class="gallery-tile is-skeleton skeleton-block" aria-hidden="true"></div>
         <div class="gallery-tile is-skeleton skeleton-block tile-tall" aria-hidden="true"></div>
         <div class="gallery-tile is-skeleton skeleton-block" aria-hidden="true"></div>
         <div class="gallery-tile is-skeleton skeleton-block" aria-hidden="true"></div>
         <div class="gallery-tile is-skeleton skeleton-block tile-tall" aria-hidden="true"></div>
         <div class="gallery-tile is-skeleton skeleton-block" aria-hidden="true"></div>
-
       </div>
 
-      <!-- Empty state -->
       <div class="empty-state" id="galleryEmpty" hidden>
         <div class="empty-state-icon" aria-hidden="true">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
             <circle cx="8.5" cy="8.5" r="1.5"/>
             <polyline points="21,15 16,10 5,21"/>
           </svg>
         </div>
         <h3 class="empty-state-title">Gallery coming soon.</h3>
-        <p class="empty-state-text">
-          New photos and videos from the workshop will appear here as they&rsquo;re uploaded.
-          <a href="contact.html">Get in touch</a> if you&rsquo;d like to see specific work.
-        </p>
+        <p class="empty-state-text">New photos and videos appear here as they're uploaded.</p>
       </div>
 
     </div>
-  </section>
+  </main>
 
   <!-- ============================================================
-       LIGHTBOX  —  fullscreen viewer for photos and videos
-       Opens when a gallery tile is clicked. Closes on overlay
-       click, X button, or Escape key. Supports arrow navigation.
+       LIGHTBOX
        ============================================================ -->
   <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Media viewer">
     <div class="lightbox-overlay" data-close-lightbox></div>
 
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close viewer">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <line x1="18" y1="6" x2="6" y2="18"/>
-        <line x1="6" y1="6" x2="18" y2="18"/>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
     </button>
 
     <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <polyline points="15 18 9 12 15 6"/>
-      </svg>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
 
     <button class="lightbox-next" id="lightboxNext" aria-label="Next">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <polyline points="9 18 15 12 9 6"/>
-      </svg>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
 
-    <div class="lightbox-stage" id="lightboxStage">
-      <!-- Image or video injected here by script.js -->
-    </div>
+    <div class="lightbox-stage" id="lightboxStage"></div>
 
     <div class="lightbox-meta">
       <span class="lightbox-caption" id="lightboxCaption"></span>
@@ -157,107 +173,44 @@
   </div>
 
   <!-- ============================================================
-       FOOTER  (shared)
+       COMPACT FOOTER
        ============================================================ -->
-  <footer class="site-footer">
+  <footer class="site-footer site-footer-compact">
     <div class="container">
-
-      <div class="footer-top">
-
+      <div class="footer-compact-inner">
         <div class="footer-brand">
           <a href="index.html" class="brand brand-footer">
-            <img src="assets/images/El_novik_logo.webp" alt="" class="brand-mark" />
+            <img src="assets/images/El_novik_logo.webp" alt="" class="brand-mark" width="32" height="32" />
             <span class="brand-name">EL-NOVIK</span>
           </a>
-          <p class="footer-tagline">
-            Built for Sound.<br />
-            Made for Creativity.<br />
-            Rooted in Nigeria.
-          </p>
+          <p class="footer-tagline">Built for Sound · Made for Creativity · Rooted in Nigeria</p>
         </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Explore</h4>
-          <ul class="footer-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="services.html">Services</a></li>
-          </ul>
+        <nav class="footer-compact-links" aria-label="Footer">
+          <a href="products.html">Products</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="footer-compact-social">
+          <a href="https://wa.me/2340000000000" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
         </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Company</h4>
-          <ul class="footer-list">
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="https://wa.me/2340000000000" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="mailto:hello@elnovik.com">Email</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Categories</h4>
-          <ul class="footer-list">
-            <li><a href="products.html?category=traditional">Traditional</a></li>
-            <li><a href="products.html?category=modern">Modern</a></li>
-            <li><a href="products.html?category=electronics">Electronics</a></li>
-            <li><a href="products.html?category=accessories">Accessories</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col footer-col-social">
-          <h4 class="footer-heading">Follow</h4>
-          <ul class="footer-social">
-            <li>
-              <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" aria-label="Facebook" target="_blank" rel="noopener">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" aria-label="YouTube" target="_blank" rel="noopener">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
-                  <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" aria-label="TikTok" target="_blank" rel="noopener">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
-
       </div>
-
-      <div class="footer-bottom">
-        <p class="footer-copy">
-          &copy; <span id="footerYear">2026</span> EL-NOVIK Musical Instruments &amp; Electronics. All rights reserved.
-        </p>
-        <p class="footer-fineprint">
-          <span class="footer-flag" aria-hidden="true">🇳🇬</span> Designed and built in Nigeria.
-        </p>
+      <div class="footer-compact-bottom">
+        <span>&copy; <span id="footerYear">2026</span> EL-NOVIK</span>
+        <span class="footer-flag" aria-hidden="true">🇳🇬</span>
       </div>
-
     </div>
   </footer>
 
   <script src="script.js" defer></script>
-
 </body>
 </html>

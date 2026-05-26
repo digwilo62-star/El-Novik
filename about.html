@@ -3,12 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="The story behind EL-NOVIK — a Nigerian musician's workshop where traditional craft meets modern audio engineering." />
-  <meta name="theme-color" content="#0E0E0E" />
+  <meta name="description" content="The story behind EL-NOVIK — a young Nigerian founder's workshop where traditional craft meets modern audio engineering." />
+  <meta name="theme-color" content="#FAF8F4" />
   <title>About — EL-NOVIK</title>
 
   <link rel="icon" type="image/webp" href="assets/images/El_novik_logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="style.css" />
+
+  <script>
+    (function() {
+      var saved = localStorage.getItem('elnovik-theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
 </head>
 <body>
 
@@ -19,7 +28,7 @@
     <div class="nav-inner">
 
       <a href="index.html" class="brand" aria-label="EL-NOVIK home">
-        <img src="assets/images/El_novik_logo.webp" alt="" class="brand-mark" />
+        <img src="assets/images/El_novik_logo.webp" alt="" class="brand-mark" width="36" height="36" />
         <span class="brand-name">EL-NOVIK</span>
       </a>
 
@@ -31,365 +40,158 @@
         <a href="services.html" class="nav-link">Services</a>
       </nav>
 
-      <a href="contact.html" class="btn btn-ghost nav-cta">Contact</a>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+            <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+            <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+            <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+        <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Contact</a>
 
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+
+   <div class="elv-drawer-back" id="drawerBack"></div>
+    <aside class="elv-drawer" id="drawer" aria-label="Mobile menu">
+      <div class="elv-drawer-top">
+        <span class="elv-drawer-brand">EL-NOVIK</span>
+        <button class="elv-drawer-x" id="drawerX" aria-label="Close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="elv-drawer-nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="elv-drawer-bottom">
+        <a href="https://wa.me/2349031482001" class="elv-drawer-wa" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          WhatsApp Us
+        </a>
+        <p class="elv-drawer-tag">Built for Sound · Made for Creativity · Rooted in Nigeria</p>
+      </div>
+    </aside>
+  </header>
+  
     </div>
   </header>
 
   <!-- ============================================================
-       PAGE HEADER  +  HERO BLOCK
+       ABOUT  —  founder photo + condensed story, one screen
        ============================================================ -->
-  <section class="page-header">
+  <main class="compact-page about-compact">
     <div class="container">
 
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="index.html">Home</a>
-        <span class="breadcrumb-sep" aria-hidden="true">/</span>
-        <span aria-current="page">About</span>
-      </nav>
+      <div class="about-split">
 
-      <div class="about-hero">
+        <div class="about-photo">
+          <img src="assets/images/founder.jpg" alt="The founder of EL-NOVIK in the workshop" loading="eager" />
+          <div class="about-photo-badge">
+          <span class="about-photo-badge-label">Founder</span>
+          <span class="about-photo-badge-name">Justice Nwobi</span>
+        </div>
+        </div>
 
-        <div class="about-hero-text">
-          <span class="eyebrow">The Story</span>
-          <h1 class="page-title about-hero-title">
-            A musician&rsquo;s ear.<br />
-            An engineer&rsquo;s standard.<br />
-            <span class="ital">A Nigerian workshop.</span>
+        <div class="about-story">
+          <span class="eyebrow">The Founder</span>
+          <h1 class="compact-title about-story-title">
+            A young Nigerian<br />
+            <span class="ital">building sound from the ground up.</span>
           </h1>
-          <p class="lede about-hero-lede">
-            EL-NOVIK is not a store. It&rsquo;s a workshop &mdash; founded by a musician who
-            spent his life learning what makes sound feel right, and who refuses to sell
-            anything he wouldn&rsquo;t play himself.
-          </p>
-        </div>
 
-        <div class="about-hero-visual">
-          <div class="about-hero-frame">
-            <img src="assets/images/El-novik.webp" alt="EL-NOVIK brand mark" class="about-hero-img" />
+          <p class="about-story-lede">
+            EL-NOVIK was started by a young Nigerian musician who fell in love with sound
+            early &mdash; and decided, instead of waiting for someone else to build the
+            workshop he wished existed, to build it himself.
+          </p>
+
+          <p class="about-story-body">
+            What sits behind the brand is a simple promise: every instrument and every
+            piece of audio equipment in the shop is chosen, tested, and stood behind by
+            someone who actually plays music. Traditional drums next to modern mixers.
+            Imported technology meeting Nigerian craftsmanship. One workshop. One standard.
+          </p>
+
+          <div class="about-pills">
+            <span class="about-pill">Built for Sound</span>
+            <span class="about-pill">Made for Creativity</span>
+            <span class="about-pill">Rooted in Nigeria</span>
+          </div>
+
+          <div class="about-actions">
+            <a href="products.html" class="btn btn-primary">
+              See the catalog
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a href="contact.html" class="btn btn-ghost">Get in touch</a>
           </div>
         </div>
 
       </div>
 
     </div>
-  </section>
+  </main>
 
   <!-- ============================================================
-       THE JOURNEY  —  the founder's story, told in chapters
+       COMPACT FOOTER
        ============================================================ -->
-  <section class="section section-journey">
+  <footer class="site-footer site-footer-compact">
     <div class="container">
-
-      <header class="section-head section-head-center">
-        <span class="eyebrow">The Journey</span>
-        <h2 class="section-title">
-          How a love for sound<br />
-          became a standard.
-        </h2>
-      </header>
-
-      <div class="journey">
-
-        <!-- Chapter 1 -->
-        <article class="journey-chapter">
-          <div class="journey-marker">
-            <span class="journey-roman">I</span>
-            <span class="journey-line" aria-hidden="true"></span>
-          </div>
-          <div class="journey-content">
-            <h3 class="journey-title">A young ear, a self-taught hand.</h3>
-            <p class="journey-text">
-              The story begins early &mdash; with a Nigerian boy who fell in love with music
-              before most kids learn to read sheet music. No formal teacher, no expensive
-              instruments. Just a relentless ear and the discipline to teach himself.
-              By the time others were starting lessons, he was already fluent.
-            </p>
-          </div>
-        </article>
-
-        <!-- Chapter 2 -->
-        <article class="journey-chapter">
-          <div class="journey-marker">
-            <span class="journey-roman">II</span>
-            <span class="journey-line" aria-hidden="true"></span>
-          </div>
-          <div class="journey-content">
-            <h3 class="journey-title">Many instruments, one language.</h3>
-            <p class="journey-text">
-              Guitar. Keyboard. Traditional drums. Modern percussion. He didn&rsquo;t pick
-              one and call it home &mdash; he learned the language each instrument spoke.
-              That fluency taught him something most musicians never learn: every
-              instrument has a soul, and every soul demands a different kind of respect.
-            </p>
-          </div>
-        </article>
-
-        <!-- Chapter 3 -->
-        <article class="journey-chapter">
-          <div class="journey-marker">
-            <span class="journey-roman">III</span>
-            <span class="journey-line" aria-hidden="true"></span>
-          </div>
-          <div class="journey-content">
-            <h3 class="journey-title">Trained abroad. Rooted at home.</h3>
-            <p class="journey-text">
-              The journey took him to the United Kingdom &mdash; not to leave Nigeria,
-              but to learn what the rest of the world considered a standard. He studied,
-              he played, he watched how serious sound engineers worked. Then he brought
-              that standard home, because Nigerian music deserved the same.
-            </p>
-          </div>
-        </article>
-
-        <!-- Chapter 4 -->
-        <article class="journey-chapter">
-          <div class="journey-marker">
-            <span class="journey-roman">IV</span>
-            <span class="journey-line journey-line-last" aria-hidden="true"></span>
-          </div>
-          <div class="journey-content">
-            <h3 class="journey-title">EL-NOVIK becomes a workshop.</h3>
-            <p class="journey-text">
-              What began as a personal practice became a brand for other musicians,
-              churches, studios, and creators. EL-NOVIK was founded on a simple
-              principle: never sell what you wouldn&rsquo;t play yourself. Every
-              instrument is chosen by someone who knows the difference. Every piece
-              of electronics is tested by an ear, not just a meter.
-            </p>
-          </div>
-        </article>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============================================================
-       WHAT WE STAND FOR  —  brand values deep dive
-       ============================================================ -->
-  <section class="section section-values">
-    <div class="container">
-
-      <header class="section-head">
-        <span class="eyebrow">What We Stand For</span>
-        <h2 class="section-title">
-          The promises<br />
-          behind every product.
-        </h2>
-      </header>
-
-      <div class="values-grid">
-
-        <article class="value">
-          <div class="value-icon" aria-hidden="true">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"/>
-              <path d="M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/>
-              <line x1="12" y1="3" x2="12" y2="9"/>
-              <line x1="12" y1="15" x2="12" y2="21"/>
-              <line x1="3" y1="12" x2="9" y2="12"/>
-              <line x1="15" y1="12" x2="21" y2="12"/>
-            </svg>
-          </div>
-          <h3 class="value-title">Tested by ear, not by spec sheet.</h3>
-          <p class="value-text">
-            Numbers and specifications matter, but they don&rsquo;t hear. Every instrument
-            and every audio component we stock is played, tested, and judged by people
-            who know what good sound feels like.
-          </p>
-        </article>
-
-        <article class="value">
-          <div class="value-icon" aria-hidden="true">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-              <polyline points="2 17 12 22 22 17"/>
-              <polyline points="2 12 12 17 22 12"/>
-            </svg>
-          </div>
-          <h3 class="value-title">Built to last in real conditions.</h3>
-          <p class="value-text">
-            Nigerian power. Nigerian humidity. Nigerian stages and Nigerian churches.
-            We don&rsquo;t recommend gear that can&rsquo;t survive how it&rsquo;s actually
-            used here. If it can&rsquo;t handle a Sunday service, we don&rsquo;t sell it.
-          </p>
-        </article>
-
-        <article class="value">
-          <div class="value-icon" aria-hidden="true">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </div>
-          <h3 class="value-title">Advice over upsell.</h3>
-          <p class="value-text">
-            We&rsquo;d rather sell you the right thing once than the wrong thing twice.
-            Tell us what you&rsquo;re building and what your budget is &mdash; we&rsquo;ll
-            tell you honestly what fits, even when that means recommending something
-            cheaper than you expected.
-          </p>
-        </article>
-
-        <article class="value">
-          <div class="value-icon" aria-hidden="true">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-          </div>
-          <h3 class="value-title">Relationships, not transactions.</h3>
-          <p class="value-text">
-            We&rsquo;re here after the sale, not just before it. Questions about setup,
-            replacements, repairs, upgrades, recommendations &mdash; that&rsquo;s the part
-            of the job most stores skip. It&rsquo;s the part that matters most to us.
-          </p>
-        </article>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============================================================
-       CLOSING CTA  —  push to Products or Contact
-       ============================================================ -->
-  <section class="section section-cta-band">
-    <div class="container">
-      <div class="cta-band">
-
-        <div class="cta-band-text">
-          <span class="eyebrow">Ready When You Are</span>
-          <h2 class="section-title">
-            Let&rsquo;s build<br />
-            something that sounds right.
-          </h2>
-          <p class="lede">
-            Whether you&rsquo;re sourcing a single instrument or kitting out a full studio,
-            we&rsquo;ll help you choose well.
-          </p>
-        </div>
-
-        <div class="cta-band-actions">
-          <a href="products.html" class="btn btn-primary">
-            Browse the catalog
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M5 12h14M13 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <a href="contact.html" class="btn btn-ghost">Talk to us</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FOOTER  (shared)
-       ============================================================ -->
-  <footer class="site-footer">
-    <div class="container">
-
-      <div class="footer-top">
-
+      <div class="footer-compact-inner">
         <div class="footer-brand">
           <a href="index.html" class="brand brand-footer">
-            <img src="assets/images/El_novik_logo.webp" alt="" class="brand-mark" />
+            <img src="assets/images/El_novik_logo.webp" alt="" class="brand-mark" width="32" height="32" />
             <span class="brand-name">EL-NOVIK</span>
           </a>
-          <p class="footer-tagline">
-            Built for Sound.<br />
-            Made for Creativity.<br />
-            Rooted in Nigeria.
-          </p>
+          <p class="footer-tagline">Built for Sound · Made for Creativity · Rooted in Nigeria</p>
         </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Explore</h4>
-          <ul class="footer-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="services.html">Services</a></li>
-          </ul>
+        <nav class="footer-compact-links" aria-label="Footer">
+          <a href="products.html">Products</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="footer-compact-social">
+          <a href="https://wa.me/2349031482001" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
         </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Company</h4>
-          <ul class="footer-list">
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="https://wa.me/2340000000000" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="mailto:hello@elnovik.com">Email</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Categories</h4>
-          <ul class="footer-list">
-            <li><a href="products.html?category=traditional">Traditional</a></li>
-            <li><a href="products.html?category=modern">Modern</a></li>
-            <li><a href="products.html?category=electronics">Electronics</a></li>
-            <li><a href="products.html?category=accessories">Accessories</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col footer-col-social">
-          <h4 class="footer-heading">Follow</h4>
-          <ul class="footer-social">
-            <li>
-              <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" aria-label="Facebook" target="_blank" rel="noopener">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" aria-label="YouTube" target="_blank" rel="noopener">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
-                  <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" aria-label="TikTok" target="_blank" rel="noopener">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
-
       </div>
-
-      <div class="footer-bottom">
-        <p class="footer-copy">
-          &copy; <span id="footerYear">2026</span> EL-NOVIK Musical Instruments &amp; Electronics. All rights reserved.
-        </p>
-        <p class="footer-fineprint">
-          <span class="footer-flag" aria-hidden="true">🇳🇬</span> Designed and built in Nigeria.
-        </p>
+      <div class="footer-compact-bottom">
+        <span>&copy; <span id="footerYear">2026</span> EL-NOVIK</span>
+        <span class="footer-flag" aria-hidden="true">🇳🇬</span>
       </div>
-
     </div>
   </footer>
 
   <script src="script.js" defer></script>
-
 </body>
 </html>
