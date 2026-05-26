@@ -1,0 +1,19 @@
+[
+  {
+    "id": 1,
+    "name": "hethth",
+    "category": "modern",
+    "price": 23445,
+    "description": "4twtety yrr",
+    "stock": true,
+    "images": [
+      {
+        "thumb": "/uploads/products/screenshot_2026-05-04_101214_1779810199960_thumb.webp",
+        "card": "/uploads/products/screenshot_2026-05-04_101214_1779810199960_card.webp",
+        "full": "/uploads/products/screenshot_2026-05-04_101214_1779810199960_full.webp"
+      }
+    ],
+    "image": "/uploads/products/screenshot_2026-05-04_101214_1779810199960_card.webp",
+    "createdAt": 1779810200051
+  }
+]
