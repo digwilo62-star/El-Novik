@@ -3,17 +3,17 @@
     "id": 1,
     "name": "keyboard",
     "category": "electronics",
-    "price": 27000,
-    "description": "led light up keyboard",
+    "price": 28000,
+    "description": "LED light up keyboard",
     "stock": true,
     "images": [
       {
-        "thumb": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_400,c_limit,q_auto,f_webp/v1779985699/elnovik/products/p4htvccyu1gxqxrove9d.webp",
-        "card": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_800,c_limit,q_auto,f_webp/v1779985699/elnovik/products/p4htvccyu1gxqxrove9d.webp",
-        "full": "https://res.cloudinary.com/dz9p9tnpe/image/upload/v1779985699/elnovik/products/p4htvccyu1gxqxrove9d.webp"
+        "thumb": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_400,c_limit,q_auto,f_webp/v1779986416/elnovik/products/g2r5elv6pndpjmubw2hj.webp",
+        "card": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_800,c_limit,q_auto,f_webp/v1779986416/elnovik/products/g2r5elv6pndpjmubw2hj.webp",
+        "full": "https://res.cloudinary.com/dz9p9tnpe/image/upload/v1779986416/elnovik/products/g2r5elv6pndpjmubw2hj.webp"
       }
     ],
-    "image": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_800,c_limit,q_auto,f_webp/v1779985699/elnovik/products/p4htvccyu1gxqxrove9d.webp",
-    "createdAt": 1779985698256
+    "image": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_800,c_limit,q_auto,f_webp/v1779986416/elnovik/products/g2r5elv6pndpjmubw2hj.webp",
+    "createdAt": 1779986415265
   }
 ]
