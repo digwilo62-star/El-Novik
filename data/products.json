@@ -3,17 +3,17 @@
     "id": 1,
     "name": "keyboard",
     "category": "electronics",
-    "price": 25000,
-    "description": "Led light up Key board",
+    "price": 27000,
+    "description": "led light up keyboard",
     "stock": true,
     "images": [
       {
-        "thumb": "/uploads/products/led_lightup_keyboard_1779961811988_thumb.webp",
-        "card": "/uploads/products/led_lightup_keyboard_1779961811988_card.webp",
-        "full": "/uploads/products/led_lightup_keyboard_1779961811988_full.webp"
+        "thumb": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_400,c_limit,q_auto,f_webp/v1779985699/elnovik/products/p4htvccyu1gxqxrove9d.webp",
+        "card": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_800,c_limit,q_auto,f_webp/v1779985699/elnovik/products/p4htvccyu1gxqxrove9d.webp",
+        "full": "https://res.cloudinary.com/dz9p9tnpe/image/upload/v1779985699/elnovik/products/p4htvccyu1gxqxrove9d.webp"
       }
     ],
-    "image": "/uploads/products/led_lightup_keyboard_1779961811988_card.webp",
-    "createdAt": 1779961812310
+    "image": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_800,c_limit,q_auto,f_webp/v1779985699/elnovik/products/p4htvccyu1gxqxrove9d.webp",
+    "createdAt": 1779985698256
   }
 ]

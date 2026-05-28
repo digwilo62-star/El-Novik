@@ -15,7 +15,15 @@ const multer = require('multer');
 const sharp = require('sharp');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser'); 
+const cloudinary = require('cloudinary').v2;
+
+// Configure Cloudinary from .env
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -96,46 +104,59 @@ const upload = multer({
 });
 
 /* ---------- Image processing ---------- */
-async function saveResizedImage(buffer, filename, targetDir) {
-  const baseName = filename.replace(/\.[^/.]+$/, '').replace(/[^a-z0-9-_]/gi, '_').toLowerCase();
-  const timestamp = Date.now();
-  const uniqueBase = `${baseName}_${timestamp}`;
+async function saveResizedImage(buffer, filename, folder) {
+  // Resize/compress with sharp first (keeps uploads fast + small)
+  const optimized = await sharp(buffer)
+    .resize({ width: 1600, withoutEnlargement: true })
+    .webp({ quality: 80 })
+    .toBuffer();
 
-  if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
-
-  // Resize to 3 sizes, all webp for performance
-  const sizes = [
-    { suffix: 'thumb', width: 400 },
-    { suffix: 'card', width: 800 },
-    { suffix: 'full', width: 1600 }
-  ];
-
-  const result = {};
-  for (const size of sizes) {
-    const outputName = `${uniqueBase}_${size.suffix}.webp`;
-    const outputPath = path.join(targetDir, outputName);
-    await sharp(buffer)
-      .resize({ width: size.width, withoutEnlargement: true })
-      .webp({ quality: 80 })
-      .toFile(outputPath);
-    result[size.suffix] = outputName;
-  }
-
-  return result;
+  // Upload the optimized image to Cloudinary
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        folder: 'elnovik/' + folder,
+        resource_type: 'image',
+        format: 'webp'
+      },
+      (error, result) => {
+        if (error) {
+          console.error('Cloudinary image error:', error);
+          return reject(error);
+        }
+        const base = result.secure_url;
+        const sized = function(w) {
+          return base.replace('/upload/', '/upload/w_' + w + ',c_limit,q_auto,f_webp/');
+        };
+        resolve({
+          thumb: sized(400),
+          card:  sized(800),
+          full:  result.secure_url
+        });
+      }
+    );
+    uploadStream.end(optimized);
+  });
 }
 
-async function saveVideo(buffer, filename, targetDir) {
-  const ext = path.extname(filename).toLowerCase() || '.mp4';
-  const baseName = filename.replace(/\.[^/.]+$/, '').replace(/[^a-z0-9-_]/gi, '_').toLowerCase();
-  const timestamp = Date.now();
-  const outputName = `${baseName}_${timestamp}${ext}`;
-  const outputPath = path.join(targetDir, outputName);
-
-  if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
-  fs.writeFileSync(outputPath, buffer);
-  return outputName;
+async function saveVideo(buffer, filename, folder) {
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        folder: 'elnovik/' + folder,
+        resource_type: 'video'
+      },
+      (error, result) => {
+        if (error) {
+          console.error('Cloudinary video error:', error);
+          return reject(error);
+        }
+        resolve(result.secure_url);
+      }
+    );
+    uploadStream.end(buffer);
+  });
 }
-
 /* ============================================================
    PUBLIC API  (no login required)
    ============================================================ */
@@ -220,11 +241,11 @@ app.post('/api/products', requireAuth, upload.array('images', 5), async (req, re
     const files = req.files || [];
     const imageObjects = [];
     for (const file of files) {
-      const sized = await saveResizedImage(file.buffer, file.originalname, path.join(UPLOADS_DIR, 'products'));
+      const sized = await saveResizedImage(file.buffer, file.originalname, 'products');
       imageObjects.push({
-        thumb: `/uploads/products/${sized.thumb}`,
-        card:  `/uploads/products/${sized.card}`,
-        full:  `/uploads/products/${sized.full}`
+        thumb: sized.thumb,
+        card:  sized.card,
+        full:  sized.full
       });
     }
 
@@ -292,23 +313,23 @@ app.post('/api/gallery', requireAuth, upload.array('media', 10), async (req, res
       let entry;
 
       if (isVideo) {
-        const filename = await saveVideo(file.buffer, file.originalname, path.join(UPLOADS_DIR, 'gallery'));
+        const videoUrl = await saveVideo(file.buffer, file.originalname, 'gallery');
         entry = {
           id: nextId(items.concat(newItems)),
           type: 'video',
-          src: `/uploads/gallery/${filename}`,
+          src: videoUrl,
           caption: caption ? caption.trim() : '',
           createdAt: Date.now()
         };
       } else {
-        const sized = await saveResizedImage(file.buffer, file.originalname, path.join(UPLOADS_DIR, 'gallery'));
+        const sized = await saveResizedImage(file.buffer, file.originalname, 'gallery');
         entry = {
           id: nextId(items.concat(newItems)),
           type: 'photo',
-          thumb: `/uploads/gallery/${sized.thumb}`,
-          card:  `/uploads/gallery/${sized.card}`,
-          full:  `/uploads/gallery/${sized.full}`,
-          src:   `/uploads/gallery/${sized.full}`,
+          thumb: sized.thumb,
+          card:  sized.card,
+          full:  sized.full,
+          src:   sized.full,
           caption: caption ? caption.trim() : '',
           createdAt: Date.now()
         };
