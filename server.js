@@ -178,9 +178,12 @@ app.post('/api/login', (req, res) => {
   // Create a token good for 24 hours
   const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '24h' });
 
+  const isProduction = process.env.NODE_ENV === 'production' || !!process.env.RENDER;
+
   res.cookie('elv_token', token, {
     httpOnly: true,
-    sameSite: 'strict',
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 24 * 60 * 60 * 1000
   });
 
@@ -188,7 +191,12 @@ app.post('/api/login', (req, res) => {
 });
 
 app.post('/api/logout', (req, res) => {
-  res.clearCookie('elv_token');
+  const isProduction = process.env.NODE_ENV === 'production' || !!process.env.RENDER;
+  res.clearCookie('elv_token', {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax'
+  });
   res.json({ success: true });
 });
 
