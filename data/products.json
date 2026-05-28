@@ -1,19 +1,19 @@
 [
   {
     "id": 1,
-    "name": "hethth",
-    "category": "modern",
-    "price": 23445,
-    "description": "4twtety yrr",
+    "name": "keyboard",
+    "category": "electronics",
+    "price": 25000,
+    "description": "Led light up Key board",
     "stock": true,
     "images": [
       {
-        "thumb": "/uploads/products/screenshot_2026-05-04_101214_1779810199960_thumb.webp",
-        "card": "/uploads/products/screenshot_2026-05-04_101214_1779810199960_card.webp",
-        "full": "/uploads/products/screenshot_2026-05-04_101214_1779810199960_full.webp"
+        "thumb": "/uploads/products/led_lightup_keyboard_1779961811988_thumb.webp",
+        "card": "/uploads/products/led_lightup_keyboard_1779961811988_card.webp",
+        "full": "/uploads/products/led_lightup_keyboard_1779961811988_full.webp"
       }
     ],
-    "image": "/uploads/products/screenshot_2026-05-04_101214_1779810199960_card.webp",
-    "createdAt": 1779810200051
+    "image": "/uploads/products/led_lightup_keyboard_1779961811988_card.webp",
+    "createdAt": 1779961812310
   }
 ]
