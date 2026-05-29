@@ -5,6 +5,14 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 
+  // Block transitions during initial load to prevent UI hang
+  document.body.classList.add('preload');
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.body.classList.remove('preload');
+    }, 100);
+  });
+
     
   /* ---------- Helpers ---------- */
   function $(sel, ctx) { return (ctx || document).querySelector(sel); }

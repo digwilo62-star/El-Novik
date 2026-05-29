@@ -3,6 +3,15 @@
    Built for Sound. Made for Creativity. Rooted in Nigeria.
    ============================================================ */
 
+/* Suppress all transitions during initial load — prevents UI hang */
+.preload *,
+.preload *::before,
+.preload *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap');
 
 /* ============================================================
@@ -405,6 +414,9 @@ h1, h2, h3, h4 {
   gap: 5px;
   border-radius: var(--r-sm);
   flex-shrink: 0;
+   will-change: auto;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .nav-toggle:hover { background: var(--bg-card); }
 .nav-toggle span {
@@ -414,7 +426,12 @@ h1, h2, h3, h4 {
   background: var(--text);
   border-radius: 2px;
   transition: transform var(--t-med) var(--ease), opacity var(--t-fast) var(--ease);
+    will-change: transform;
 }
+
+
+
+
 .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
