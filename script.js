@@ -343,26 +343,6 @@ document.addEventListener('DOMContentLoaded', function() {
     return card;
   }
 
-  var DEMO_PRODUCTS = [
-    { id: 'demo-1', name: 'Talking Drum (Iya Ilu)', category: 'traditional', price: 0,
-      description: 'Hand-carved Yoruba talking drum, professionally tuned.',
-      images: ['assets/images/traditional.webp'], featured: true },
-    { id: 'demo-2', name: 'Acoustic Guitar — Dreadnought', category: 'modern', price: 95000,
-      description: 'Solid spruce top, mahogany back and sides. Tested in-shop.',
-      images: ['assets/images/modern.webp'] },
-    { id: 'demo-3', name: 'Studio Audio Mixer — 12 Channel', category: 'electronics', price: 0,
-      description: 'Professional 12-channel mixer for churches, studios, live use.',
-      images: ['assets/images/electronics.webp'], featured: true },
-    { id: 'demo-4', name: 'Shekere — Traditional', category: 'traditional', price: 18000,
-      description: 'Hand-strung shekere, perfect for traditional ensembles.',
-      images: ['assets/images/traditional.webp'] },
-    { id: 'demo-5', name: 'Digital Keyboard 61-key', category: 'modern', price: 145000,
-      description: 'Touch-sensitive 61-key keyboard with weighted feel.',
-      images: ['assets/images/modern.webp'] },
-    { id: 'demo-6', name: 'XLR Cable — 10m Pro', category: 'electronics', price: 8500,
-      description: 'Professional balanced XLR cable. Built for stage and studio.',
-      images: ['assets/images/electronics.webp'] }
-  ];
 
   var allProducts = [];
   var activeFilter = 'all';
@@ -378,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return Array.isArray(data) ? data : (data.products || []);
       })
       .catch(function() {
-        return DEMO_PRODUCTS;
+        return [];
       });
   }
 
