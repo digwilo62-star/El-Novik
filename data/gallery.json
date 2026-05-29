@@ -5,5 +5,12 @@
     "src": "https://res.cloudinary.com/dz9p9tnpe/video/upload/v1780006334/elnovik/gallery/x55nghob7rfvzp1gd9lh.mp4",
     "caption": "keyboard",
     "createdAt": 1780006335032
+  },
+  {
+    "id": 2,
+    "type": "video",
+    "src": "https://res.cloudinary.com/dz9p9tnpe/video/upload/v1780049226/elnovik/gallery/bf6bixuvxwfd7u47s0jt.mp4",
+    "caption": "keyboard quality stand",
+    "createdAt": 1780049225888
   }
 ]

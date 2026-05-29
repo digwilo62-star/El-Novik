@@ -303,7 +303,11 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (product.image) {
       img = product.image;
     }
-
+    // Add Cloudinary auto-format and auto-quality if it's a Cloudinary URL
+    if (img && img.indexOf('res.cloudinary.com') > -1 && img.indexOf('f_auto') === -1) {
+      img = img.replace('/upload/', '/upload/f_auto,q_auto/');
+    } 
+   
     var cat = (product.category || '').charAt(0).toUpperCase() + (product.category || '').slice(1);
 
     card.innerHTML = '' +

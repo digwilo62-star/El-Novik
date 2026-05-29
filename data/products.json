@@ -15,5 +15,27 @@
     ],
     "image": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_800,c_limit,q_auto,f_webp/v1779986416/elnovik/products/g2r5elv6pndpjmubw2hj.webp",
     "createdAt": 1779986415265
+  },
+  {
+    "id": 2,
+    "name": "Keyboard 483",
+    "category": "modern",
+    "price": 500000,
+    "description": "brand new whole sale",
+    "stock": true,
+    "images": [
+      {
+        "thumb": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_400,c_limit,q_auto,f_webp/v1780048874/elnovik/products/f4dh6umuyl9np95hqetm.webp",
+        "card": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_800,c_limit,q_auto,f_webp/v1780048874/elnovik/products/f4dh6umuyl9np95hqetm.webp",
+        "full": "https://res.cloudinary.com/dz9p9tnpe/image/upload/v1780048874/elnovik/products/f4dh6umuyl9np95hqetm.webp"
+      },
+      {
+        "thumb": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_400,c_limit,q_auto,f_webp/v1780048876/elnovik/products/rxpmc6t0ygw0imiq6t2z.webp",
+        "card": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_800,c_limit,q_auto,f_webp/v1780048876/elnovik/products/rxpmc6t0ygw0imiq6t2z.webp",
+        "full": "https://res.cloudinary.com/dz9p9tnpe/image/upload/v1780048876/elnovik/products/rxpmc6t0ygw0imiq6t2z.webp"
+      }
+    ],
+    "image": "https://res.cloudinary.com/dz9p9tnpe/image/upload/w_800,c_limit,q_auto,f_webp/v1780048874/elnovik/products/f4dh6umuyl9np95hqetm.webp",
+    "createdAt": 1780048876537
   }
 ]
