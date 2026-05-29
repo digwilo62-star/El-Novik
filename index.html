@@ -204,6 +204,74 @@
     </div>
   </footer>
 
+
+  <script>
+  // Wire up hamburger ASAP, before main script loads
+  (function() {
+    function init() {
+      var hamburger = document.getElementById('navToggle');
+      var drawer = document.getElementById('drawer');
+      var drawerBack = document.getElementById('drawerBack');
+      var drawerX = document.getElementById('drawerX');
+      if (!hamburger) return;
+
+      function openDrawer() {
+        if (drawer) drawer.classList.add('show');
+        if (drawerBack) drawerBack.classList.add('show');
+        hamburger.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('elv-locked');
+      }
+      function closeDrawer() {
+        if (drawer) drawer.classList.remove('show');
+        if (drawerBack) drawerBack.classList.remove('show');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('elv-locked');
+      }
+
+      hamburger.addEventListener('click', function() {
+        if (window.innerWidth >= 900) return;
+        if (drawer && drawer.classList.contains('show')) closeDrawer();
+        else openDrawer();
+      }, { passive: true });
+
+      if (drawerX) drawerX.addEventListener('click', closeDrawer);
+      if (drawerBack) drawerBack.addEventListener('click', closeDrawer);
+
+      // Mark hamburger as 'ready' so we can show it's wired
+      hamburger.setAttribute('data-ready', 'true');
+      // Wire theme toggle the same way
+      var themeBtn = document.getElementById('themeToggle');
+      var docRoot = document.documentElement;
+
+      // Apply saved theme on load
+      var savedTheme = localStorage.getItem('elnovik-theme');
+      if (savedTheme === 'dark') {
+        docRoot.setAttribute('data-theme', 'dark');
+      }
+
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function() {
+          var isDark = docRoot.getAttribute('data-theme') === 'dark';
+          if (isDark) {
+            docRoot.removeAttribute('data-theme');
+            localStorage.setItem('elnovik-theme', 'light');
+          } else {
+            docRoot.setAttribute('data-theme', 'dark');
+            localStorage.setItem('elnovik-theme', 'dark');
+          }
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+<script src="script.js" defer></script>
+
   <script src="script.js" defer></script>
 
 </body>

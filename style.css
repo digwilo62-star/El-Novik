@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap');
+
 /* ============================================================
    EL-NOVIK — Complete Stylesheet
    Built for Sound. Made for Creativity. Rooted in Nigeria.
@@ -10,9 +12,6 @@
   transition: none !important;
   animation: none !important;
 }
-
-
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap');
 
 /* ============================================================
    TOKENS
@@ -281,7 +280,10 @@ h1, h2, h3, h4 {
   -webkit-backdrop-filter: saturate(160%) blur(18px);
   border-bottom: 1px solid transparent;
   transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease);
+  transform: translateZ(0);
+  contain: layout style;
 }
+
 .site-header.is-scrolled {
   background: rgba(250, 248, 244, 0.96);
   border-bottom-color: var(--line);
@@ -418,6 +420,12 @@ h1, h2, h3, h4 {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
+
+.nav-toggle:active {
+  transform: scale(0.92);
+  background: var(--bg-card);
+}
+
 .nav-toggle:hover { background: var(--bg-card); }
 .nav-toggle span {
   display: block;
@@ -607,6 +615,7 @@ h1, h2, h3, h4 {
   position: relative;
   overflow: hidden;
 }
+
 .home-hero::before {
   content: "";
   position: absolute;
@@ -615,6 +624,8 @@ h1, h2, h3, h4 {
   background:
     radial-gradient(ellipse 50% 60% at 80% 20%, var(--accent-soft), transparent 60%),
     radial-gradient(ellipse 40% 50% at 10% 90%, var(--wood-soft), transparent 60%);
+  will-change: opacity;
+  contain: strict;
 }
 
 .home-hero-inner {
@@ -682,7 +693,9 @@ h1, h2, h3, h4 {
   border: 1px solid var(--line);
   transition: border-color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
   isolation: isolate;
+  contain: layout paint;
 }
+
 @media (min-width: 1100px) {
   .home-cat { aspect-ratio: auto; min-height: 140px; }
 }

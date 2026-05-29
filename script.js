@@ -4,6 +4,35 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
+  /* ============================================================
+     THEME TOGGLE
+     ============================================================ */
+  (function() {
+    var themeToggle = document.getElementById('themeToggle');
+    var root = document.documentElement;
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+      } else {
+        root.removeAttribute('data-theme');
+      }
+    }
+
+    // Apply saved theme on load
+    var saved = localStorage.getItem('elnovik-theme');
+    if (saved === 'dark') applyTheme('dark');
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+        var isDark = root.getAttribute('data-theme') === 'dark';
+        var next = isDark ? 'light' : 'dark';
+        applyTheme(next);
+        localStorage.setItem('elnovik-theme', next);
+      });
+    }
+  })();
+
 
   // Block transitions during initial load to prevent UI hang
   document.body.classList.add('preload');
@@ -25,28 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var yearEl = $('#footerYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ============================================================
-     2.  Theme toggle
-     ============================================================ */
-  var themeToggle = $('#themeToggle');
-  var root = document.documentElement;
-
-  function setTheme(theme) {
-    if (theme === 'dark') {
-      root.setAttribute('data-theme', 'dark');
-    } else {
-      root.removeAttribute('data-theme');
-    }
-    try { localStorage.setItem('elnovik-theme', theme); } catch (e) {}
-  }
-
-  if (themeToggle) {
-    themeToggle.addEventListener('click', function() {
-      var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-  }
-
+  
   /* ============================================================
      3.  Sticky header
      ============================================================ */
@@ -133,10 +141,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.remove('elv-locked');
   }
 
-  if (hamburger) {
+// Skip rewiring if inline script already attached
+  if (hamburger && hamburger.getAttribute('data-ready') !== 'true') {
     hamburger.addEventListener('click', function(e) {
-      e.preventDefault();
-      // Hard guard — never open drawer on desktop
       if (window.innerWidth >= 900) {
         closeDrawer();
         return;
