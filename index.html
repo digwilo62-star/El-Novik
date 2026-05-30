@@ -17,11 +17,30 @@
   <link rel="stylesheet" href="style.css" />
 
   <!-- Theme is set before paint to prevent a flash of wrong theme -->
-  <script>
+ <script>
     (function() {
       var saved = localStorage.getItem('elnovik-theme');
       if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
     })();
+  </script>
+
+  <script>
+    // Wire theme toggle once DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('themeToggle');
+      if (!btn) return;
+      btn.onclick = function() {
+        var root = document.documentElement;
+        var isDark = root.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          root.removeAttribute('data-theme');
+          localStorage.setItem('elnovik-theme', 'light');
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          localStorage.setItem('elnovik-theme', 'dark');
+        }
+      };
+    });
   </script>
 </head>
 <body>

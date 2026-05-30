@@ -4,34 +4,30 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  /* ============================================================
-     THEME TOGGLE
+/* ============================================================
+     THEME TOGGLE  (delegated — survives DOM rebuilds)
      ============================================================ */
-  (function() {
-    var themeToggle = document.getElementById('themeToggle');
-    var root = document.documentElement;
+  var root = document.documentElement;
 
-    function applyTheme(theme) {
-      if (theme === 'dark') {
-        root.setAttribute('data-theme', 'dark');
-      } else {
-        root.removeAttribute('data-theme');
-      }
+  // Apply saved theme immediately
+  var savedTheme = localStorage.getItem('elnovik-theme');
+  if (savedTheme === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+  }
+
+  // Use event delegation — listen on document, fire on any future or existing #themeToggle
+  document.addEventListener('click', function(e) {
+    var target = e.target.closest && e.target.closest('#themeToggle');
+    if (!target) return;
+    var isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      root.removeAttribute('data-theme');
+      localStorage.setItem('elnovik-theme', 'light');
+    } else {
+      root.setAttribute('data-theme', 'dark');
+      localStorage.setItem('elnovik-theme', 'dark');
     }
-
-    // Apply saved theme on load
-    var saved = localStorage.getItem('elnovik-theme');
-    if (saved === 'dark') applyTheme('dark');
-
-    if (themeToggle) {
-      themeToggle.addEventListener('click', function() {
-        var isDark = root.getAttribute('data-theme') === 'dark';
-        var next = isDark ? 'light' : 'dark';
-        applyTheme(next);
-        localStorage.setItem('elnovik-theme', next);
-      });
-    }
-  })();
+  });
 
 
   // Block transitions during initial load to prevent UI hang
