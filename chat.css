@@ -1,0 +1,294 @@
+/* ============================================================
+   EL-NOVIK CHAT WIDGET
+   ============================================================ */
+
+/* Floating button */
+.elv-chat-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #1F6B4A;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(31, 107, 74, 0.45);
+  z-index: 9000;
+  animation: elv-pulse 2.5s ease-in-out infinite;
+  transition: transform 180ms ease, background 180ms ease;
+}
+.elv-chat-btn:hover {
+  background: #18553B;
+  transform: scale(1.08);
+  animation: none;
+}
+.elv-chat-btn svg {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+/* Pulse animation to draw attention */
+@keyframes elv-pulse {
+  0%   { box-shadow: 0 4px 20px rgba(31,107,74,0.45), 0 0 0 0 rgba(31,107,74,0.4); }
+  50%  { box-shadow: 0 4px 20px rgba(31,107,74,0.45), 0 0 0 12px rgba(31,107,74,0); }
+  100% { box-shadow: 0 4px 20px rgba(31,107,74,0.45), 0 0 0 0 rgba(31,107,74,0); }
+}
+
+/* Notification dot */
+.elv-chat-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: #E53E3E;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* Chat panel */
+.elv-chat-panel {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  height: 520px;
+  max-height: calc(100vh - 130px);
+  background: #FAF8F4;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(14,12,8,0.18);
+  display: flex;
+  flex-direction: column;
+  z-index: 8999;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+[data-theme="dark"] .elv-chat-panel {
+  background: #161616;
+}
+.elv-chat-panel.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+/* Panel header */
+.elv-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: #1F6B4A;
+  color: #fff;
+  flex-shrink: 0;
+}
+.elv-chat-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+.elv-chat-header-info {
+  flex: 1;
+}
+.elv-chat-header-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.elv-chat-header-status {
+  font-size: 11px;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.elv-chat-header-status::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #68D391;
+  display: inline-block;
+}
+.elv-chat-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 180ms ease;
+  flex-shrink: 0;
+}
+.elv-chat-close:hover { background: rgba(255,255,255,0.25); }
+
+/* Messages area */
+.elv-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #E8E2D6 transparent;
+}
+
+/* Message bubbles */
+.elv-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 82%;
+}
+.elv-msg.bot { align-self: flex-start; }
+.elv-msg.user { align-self: flex-end; }
+
+.elv-msg-bubble {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+.elv-msg.bot .elv-msg-bubble {
+  background: #fff;
+  color: #0E0C08;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+[data-theme="dark"] .elv-msg.bot .elv-msg-bubble {
+  background: #1F1F1F;
+  color: #F4F1EC;
+}
+.elv-msg.user .elv-msg-bubble {
+  background: #1F6B4A;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.elv-msg-time {
+  font-size: 0.68rem;
+  color: #9E9689;
+  margin-top: 3px;
+  padding: 0 4px;
+}
+.elv-msg.user .elv-msg-time { text-align: right; }
+
+/* WhatsApp handoff button inside chat */
+.elv-chat-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 10px 16px;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 180ms ease;
+}
+.elv-chat-wa-btn:hover { background: #1DA851; }
+.elv-chat-wa-btn svg { width: 16px; height: 16px; }
+
+/* Typing indicator */
+.elv-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 14px;
+  background: #fff;
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  width: fit-content;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+[data-theme="dark"] .elv-typing { background: #1F1F1F; }
+.elv-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #A87B4B;
+  animation: elv-bounce 1.2s ease-in-out infinite;
+}
+.elv-typing span:nth-child(2) { animation-delay: 0.2s; }
+.elv-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes elv-bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+/* Input area */
+.elv-chat-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid #E8E2D6;
+  background: #FAF8F4;
+  flex-shrink: 0;
+}
+[data-theme="dark"] .elv-chat-input-wrap {
+  background: #161616;
+  border-top-color: #262626;
+}
+.elv-chat-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #E8E2D6;
+  background: #fff;
+  font-size: 0.9rem;
+  color: #0E0C08;
+  outline: none;
+  font-family: 'Manrope', sans-serif;
+  transition: border-color 180ms ease;
+}
+[data-theme="dark"] .elv-chat-input {
+  background: #1A1A1A;
+  border-color: #262626;
+  color: #F4F1EC;
+}
+.elv-chat-input:focus { border-color: #1F6B4A; }
+.elv-chat-input::placeholder { color: #9E9689; }
+
+.elv-chat-send {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1F6B4A;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 180ms ease, transform 180ms ease;
+}
+.elv-chat-send:hover { background: #18553B; transform: scale(1.05); }
+.elv-chat-send svg { width: 16px; height: 16px; }

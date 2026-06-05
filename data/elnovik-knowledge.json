@@ -1,0 +1,61 @@
+{
+  "business": {
+    "name": "EL-NOVIK",
+    "tagline": "Built for Sound. Made for Creativity. Rooted in Nigeria.",
+    "description": "EL-NOVIK is a Nigerian musical instruments and electronics shop. We sell traditional African instruments, modern instruments, and audio electronics.",
+    "whatsapp": "+2349031482001",
+    "whatsapp_link": "https://wa.me/2349031482001",
+    "location": "Nigeria",
+    "hours": "Monday to Saturday, 9am to 6pm"
+  },
+  "categories": [
+    {
+      "name": "Traditional Instruments",
+      "slug": "traditional",
+      "description": "African traditional instruments including drums, talking drums, shekere, and more."
+    },
+    {
+      "name": "Modern Instruments",
+      "slug": "modern",
+      "description": "Guitars, keyboards, bass guitars, and other contemporary instruments."
+    },
+    {
+      "name": "Electronics",
+      "slug": "electronics",
+      "description": "Audio electronics including mixers, amplifiers, microphones, speakers, and studio equipment."
+    }
+  ],
+  "services": [
+    "Instrument sales",
+    "Electronics sales",
+    "Instrument repairs and maintenance",
+    "Music equipment consultation"
+  ],
+  "faq": [
+    {
+      "question": "Where are you located?",
+      "answer": "We are based in Nigeria. Contact us on WhatsApp for our exact address and directions."
+    },
+    {
+      "question": "Do you deliver?",
+      "answer": "Yes, we can arrange delivery. Chat with us on WhatsApp to discuss delivery options and costs to your location."
+    },
+    {
+      "question": "Can I negotiate the price?",
+      "answer": "We offer fair and competitive prices. Reach out on WhatsApp to discuss pricing on specific items."
+    },
+    {
+      "question": "Do you repair instruments?",
+      "answer": "Yes, we offer repair and maintenance services. Send us a WhatsApp message describing what needs fixing and we will advise you."
+    },
+    {
+      "question": "How do I make a purchase?",
+      "answer": "Simply find the product you want on our website and click the WhatsApp button, or chat with our team directly."
+    }
+  ],
+  "personality": {
+    "tone": "friendly, knowledgeable, and proudly Nigerian",
+    "language": "clear simple English, occasionally warm and conversational",
+    "avoid": "being too formal, using jargon, making up prices or product details not in this document"
+  }
+}

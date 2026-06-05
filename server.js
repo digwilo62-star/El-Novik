@@ -390,6 +390,68 @@ app.get('/admin', (req, res) => {
    START
    ============================================================ */
 
+// ============================================================
+// CHAT API — Gemini powered EL-NOVIK assistant
+// ============================================================
+
+const Groq = require('groq-sdk');
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
+app.post('/api/chat', async (req, res) => {
+  try {
+    const { message, history = [] } = req.body;
+    if (!message) return res.status(400).json({ error: 'No message provided' });
+
+    // Load the knowledge base fresh each time so admin edits take effect immediately
+    const knowledge = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/elnovik-knowledge.json'), 'utf8'));
+
+    // Detect purchase intent
+    const purchaseWords = ['buy', 'purchase', 'order', 'price', 'cost', 'how much', 'want to get', 'i need', 'pay', 'payment'];
+    const wantsToBuy = purchaseWords.some(word => message.toLowerCase().includes(word));
+
+    // Build the system prompt from the knowledge base
+    const systemPrompt = `You are a helpful assistant for EL-NOVIK, a Nigerian musical instruments and electronics shop.
+
+Here is everything you know about the business:
+${JSON.stringify(knowledge, null, 2)}
+
+Rules:
+- Only answer questions related to EL-NOVIK and its products, services, and general music topics.
+- Be friendly, warm, and conversational. You are representing a proudly Nigerian business.
+- Keep responses short and clear — 2 to 4 sentences maximum.
+- Never make up prices or product details that are not in the knowledge base.
+- If someone asks about a specific product price and you don't have it, tell them to ask on WhatsApp.
+- If someone wants to buy something, encourage them warmly and let them know the team will assist them on WhatsApp.
+- Do not mention that you are an AI unless directly asked.`;
+
+   const completion = await groq.chat.completions.create({
+ model: 'llama-3.3-70b-versatile',
+  messages: [
+    { role: 'system', content: systemPrompt },
+    ...history.map(msg => ({
+      role: msg.role,
+      content: msg.text
+    })),
+    { role: 'user', content: message }
+  ],
+  max_tokens: 300,
+  temperature: 0.7
+});
+
+const reply = completion.choices[0].message.content;
+
+    res.json({
+      reply,
+      wantsToBuy
+    });
+
+  } catch (err) {
+    console.error('Chat error:', err.message);
+    res.status(500).json({ error: 'Chat failed. Please try again.' });
+  }
+});
+
+
 app.listen(PORT, () => {
   console.log('');
   console.log('  ╔════════════════════════════════════════╗');
