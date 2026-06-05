@@ -421,7 +421,7 @@ Rules:
 - Keep responses short and clear — 2 to 4 sentences maximum.
 - Never make up prices or product details that are not in the knowledge base.
 - If someone asks about a specific product price and you don't have it, tell them to ask on WhatsApp.
-- If someone wants to buy something, encourage them warmly and let them know the team will assist them on WhatsApp.
+- If someone wants to buy something, encourage them warmly and tell them our team is ready to help. Do NOT include raw URLs or links in your response — a WhatsApp button will appear automatically for the user to click.
 - Do not mention that you are an AI unless directly asked.`;
 
    const completion = await groq.chat.completions.create({
