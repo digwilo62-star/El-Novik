@@ -199,6 +199,20 @@
 
   // ── Wire everything up ─────────────────────────────────────
   function init() {
+    
+    buildWidget();
+
+    document.getElementById('elvChatBtn').addEventListener('click', () => {
+      isOpen ? closeChat() : openChat();
+    });
+
+    document.getElementById('elvChatClose').addEventListener('click', closeChat);
+
+    document.getElementById('elvChatSend').addEventListener('click', sendMessage);
+
+    document.getElementById('elvChatInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') sendMessage();
+    });
 
     // Mobile keyboard detection
 const input = document.getElementById('elvChatInput');
@@ -214,20 +228,6 @@ input.addEventListener('focus', function() {
 input.addEventListener('blur', function() {
   document.getElementById('elvChatPanel').classList.remove('keyboard-open');
 });
-
-    buildWidget();
-
-    document.getElementById('elvChatBtn').addEventListener('click', () => {
-      isOpen ? closeChat() : openChat();
-    });
-
-    document.getElementById('elvChatClose').addEventListener('click', closeChat);
-
-    document.getElementById('elvChatSend').addEventListener('click', sendMessage);
-
-    document.getElementById('elvChatInput').addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') sendMessage();
-    });
   }
 
   // Start when DOM is ready
