@@ -12,15 +12,18 @@
   function buildWidget() {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = `
+      <!-- Floating button -->
       <button class="elv-chat-btn" id="elvChatBtn" aria-label="Chat with us">
         <span class="elv-chat-dot"></span>
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.936 1.42 5.563 3.653 7.315L4.5 22l3.875-1.812A10.56 10.56 0 0 0 12 20.486c5.523 0 10-4.145 10-9.243S17.523 2 12 2zm1 13H7v-2h6v2zm2-4H7V9h8v2z"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
       </button>
 
+      <!-- Chat panel -->
       <div class="elv-chat-panel" id="elvChatPanel" role="dialog" aria-label="EL-NOVIK Chat">
 
+        <!-- Header -->
         <div class="elv-chat-header">
           <div class="elv-chat-avatar">🎵</div>
           <div class="elv-chat-header-info">
@@ -28,15 +31,17 @@
             <div class="elv-chat-header-status">Online now</div>
           </div>
           <button class="elv-chat-close" id="elvChatClose" aria-label="Close chat">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"/>
               <line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
           </button>
         </div>
 
+        <!-- Messages -->
         <div class="elv-chat-messages" id="elvChatMessages"></div>
 
+        <!-- Input -->
         <div class="elv-chat-input-wrap">
           <input
             type="text"
@@ -56,6 +61,7 @@
 
       </div>
     `;
+
     document.body.appendChild(wrapper);
   }
 
@@ -64,23 +70,8 @@
     return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
 
-  // ── WhatsApp button HTML ───────────────────────────────────
-  function waButton() {
-    return `
-      <a href="${WA_LINK}" target="_blank" rel="noopener" class="elv-chat-wa-btn">
-        <span class="elv-wa-icon">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.529 5.855L.057 23.886l6.198-1.625A11.933 11.933 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.374l-.36-.214-3.68.965.981-3.595-.234-.369A9.818 9.818 0 1 1 12 21.818z"/>
-          </svg>
-        </span>
-        <span>Chat with us on WhatsApp</span>
-      </a>
-    `;
-  }
-
   // ── Add a message bubble ───────────────────────────────────
-  function addMessage(text, role, showWa = false) {
+  function addMessage(text, role, wantsToBuy = false) {
     const messages = document.getElementById('elvChatMessages');
 
     const msg = document.createElement('div');
@@ -96,59 +87,62 @@
 
     msg.appendChild(bubble);
 
-    if (role === 'bot' && showWa) {
-      const waWrap = document.createElement('div');
-      waWrap.innerHTML = waButton();
-      msg.appendChild(waWrap.firstElementChild);
+    // If bot detected purchase intent, add WhatsApp button below the bubble
+    if (role === 'bot' && wantsToBuy) {
+      const waBtn = document.createElement('a');
+      waBtn.href = WA_LINK;
+      waBtn.target = '_blank';
+      waBtn.rel = 'noopener';
+      waBtn.className = 'elv-chat-wa-btn';
+      waBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+        Chat with us on WhatsApp
+      `;
+      msg.appendChild(waBtn);
     }
 
     msg.appendChild(time);
     messages.appendChild(msg);
 
-    // Save to history
-    conversationHistory.push({
-      role: role === 'user' ? 'user' : 'assistant',
-      text
-    });
+    // Save to conversation history for context
+    conversationHistory.push({ role: role === 'user' ? 'user' : 'assistant', text });
 
-    // Smooth scroll to bottom
-    setTimeout(() => {
-      messages.scrollTo({ top: messages.scrollHeight, behavior: 'smooth' });
-    }, 50);
+    // Scroll to latest message
+    messages.scrollTop = messages.scrollHeight;
   }
 
-  // ── Typing indicator ───────────────────────────────────────
+  // ── Show typing indicator ──────────────────────────────────
   function showTyping() {
     const messages = document.getElementById('elvChatMessages');
-    const wrap = document.createElement('div');
-    wrap.className = 'elv-typing-wrap';
-    wrap.id = 'elvTyping';
-    wrap.innerHTML = `
+    const typing = document.createElement('div');
+    typing.className = 'elv-msg bot';
+    typing.id = 'elvTyping';
+    typing.innerHTML = `
       <div class="elv-typing">
         <span></span><span></span><span></span>
       </div>
     `;
-    messages.appendChild(wrap);
-    setTimeout(() => {
-      messages.scrollTo({ top: messages.scrollHeight, behavior: 'smooth' });
-    }, 50);
+    messages.appendChild(typing);
+    messages.scrollTop = messages.scrollHeight;
     isTyping = true;
   }
 
+  // ── Remove typing indicator ────────────────────────────────
   function hideTyping() {
     const el = document.getElementById('elvTyping');
     if (el) el.remove();
     isTyping = false;
   }
 
-  // ── Send message ───────────────────────────────────────────
+  // ── Send message to API ────────────────────────────────────
   async function sendMessage() {
     const input = document.getElementById('elvChatInput');
     const message = input.value.trim();
     if (!message || isTyping) return;
 
     input.value = '';
-    input.focus();
     addMessage(message, 'user');
     showTyping();
 
@@ -158,7 +152,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message,
-          history: conversationHistory.slice(-10)
+          history: conversationHistory.slice(-10) // send last 10 messages for context
         })
       });
 
@@ -168,16 +162,16 @@
       if (data.reply) {
         addMessage(data.reply, 'bot', data.wantsToBuy);
       } else {
-        addMessage('Sorry, something went wrong. Please reach us directly on WhatsApp.', 'bot', true);
+        addMessage('Sorry, I had trouble with that. Please try again or reach us on WhatsApp.', 'bot', true);
       }
 
     } catch (err) {
       hideTyping();
-      addMessage('Connection issue. Please try again or reach us on WhatsApp.', 'bot', true);
+      addMessage('Connection issue. Please check your internet and try again.', 'bot', true);
     }
   }
 
-  // ── Open / close ───────────────────────────────────────────
+  // ── Open / close panel ────────────────────────────────────
   function openChat() {
     const panel = document.getElementById('elvChatPanel');
     const dot = document.querySelector('.elv-chat-dot');
@@ -185,10 +179,11 @@
     isOpen = true;
     if (dot) dot.style.display = 'none';
 
+    // Send greeting on first open
     if (conversationHistory.length === 0) {
       setTimeout(() => {
-        addMessage('👋 Welcome to EL-NOVIK! I\'m here to help you find the perfect instrument or electronics. What can I help you with today?', 'bot');
-      }, 350);
+        addMessage('👋 Hello! Welcome to EL-NOVIK. I\'m here to help you find the perfect instrument or electronics. What can I help you with today?', 'bot');
+      }, 400);
     }
 
     setTimeout(() => {
@@ -197,12 +192,29 @@
   }
 
   function closeChat() {
-    document.getElementById('elvChatPanel').classList.remove('show');
+    const panel = document.getElementById('elvChatPanel');
+    panel.classList.remove('show');
     isOpen = false;
   }
 
-  // ── Init ───────────────────────────────────────────────────
+  // ── Wire everything up ─────────────────────────────────────
   function init() {
+
+    // Mobile keyboard detection
+const input = document.getElementById('elvChatInput');
+input.addEventListener('focus', function() {
+  document.getElementById('elvChatPanel').classList.add('keyboard-open');
+  setTimeout(() => {
+    document.getElementById('elvChatMessages').scrollTo({
+      top: document.getElementById('elvChatMessages').scrollHeight,
+      behavior: 'smooth'
+    });
+  }, 350);
+});
+input.addEventListener('blur', function() {
+  document.getElementById('elvChatPanel').classList.remove('keyboard-open');
+});
+
     buildWidget();
 
     document.getElementById('elvChatBtn').addEventListener('click', () => {
@@ -210,16 +222,15 @@
     });
 
     document.getElementById('elvChatClose').addEventListener('click', closeChat);
+
     document.getElementById('elvChatSend').addEventListener('click', sendMessage);
 
     document.getElementById('elvChatInput').addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
+      if (e.key === 'Enter') sendMessage();
     });
   }
 
+  // Start when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
